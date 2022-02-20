@@ -8,34 +8,56 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView result;
-    private TextView typing;
 
-    private Button[] digits = new Button[10];
+    private TextView result; // upper text box showing the result
+    private TextView typing; // lower text box showing the calculation process
 
-    private Button dot;
-    private Button equal;
+    private Button[] digits = new Button[10]; // 10 digital numbers buttons
+
+    //Operation buttons:
     private Button times;
     private Button minus;
     private Button plus;
     private Button divide;
+
+    //Other buttons like equal, brackets, delete, clear and floating point.
+    private Button dot;
+    private Button equal;
     private Button left_bracket;
     private Button right_bracket;
     private Button delete;
     private Button clear;
 
-    private boolean isResult = false;
+    // check if the result has shown which is not 0
+    private boolean hasResult = false;
 
+    // Operations symbol logic function:
+    public void operations(String operation){
+        boolean isLastCharDigit = Character.isDigit(typing.getText().charAt(typing.getText().length()-1));
+        boolean isLastCharRightBracket = typing.getText().charAt(typing.getText().length()-1)==')';
+
+        if(!hasResult && (isLastCharDigit||isLastCharRightBracket) ){
+            typing.append(operation);
+        }
+        else if(hasResult){
+            typing.setText(result.getText().toString() + operation);
+            hasResult = false;
+        }
+    }
+
+    // main function once activity is created:
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // initializing the text boxes:
         result = (TextView) findViewById(R.id.resultText);
         typing = (TextView) findViewById(R.id.typingText);
         result.setText("0");
         typing.setText("0");
 
+        // creating the Button objects and their functions for 10 digital buttons:
         digits[0] = (Button) findViewById(R.id.button_zero);
         digits[1] = (Button) findViewById(R.id.button_one);
         digits[2] = (Button) findViewById(R.id.button_two);
@@ -47,31 +69,39 @@ public class MainActivity extends AppCompatActivity {
         digits[8] = (Button) findViewById(R.id.button_eight);
         digits[9] = (Button) findViewById(R.id.button_nine);
 
+        // running a loop to go through 10 digital number buttons
         for(int i = 0; i<10; i++){
             String number = Integer.toString(i);
             digits[i].setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    if(!typing.getText().toString().equals("0")&&typing.getText().charAt(typing.getText().length()-1)!=')') {
+
+                    int lenOfTyping = typing.getText().length();
+                    char lastLetterOfTyping = typing.getText().charAt(lenOfTyping-1);
+                    boolean isTypingZero = typing.getText().toString().equals("0");
+
+                    if(!isTypingZero&&lastLetterOfTyping!=')') {
                         typing.append(number);
                     }
-                    if(typing.getText().toString().equals("0")){
+                    if(isTypingZero){
                         typing.setText(number);
                     }
                 }
             });
         }
 
+        //Floating point logic function:
         dot = (Button) findViewById(R.id.dot_button);
         dot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isDot = false;
+                boolean hasDot = false;
                 int i = typing.getText().length()-1;
+                // to find if there is a dot already before, and that are all digits before this dot is going to place.
                 while(i>1){
                     if(Character.isDigit(typing.getText().charAt(i))){
                         if(typing.getText().charAt(i-1) == '.'){
-                            isDot = true;
+                            hasDot = true;
                         }
                     }
                     else{
@@ -79,74 +109,54 @@ public class MainActivity extends AppCompatActivity {
                     }
                     i--;
                 }
-
-                if(Character.isDigit(typing.getText().charAt(typing.getText().length()-1)) && !isDot){
+                // After last loop, hasDot will identify if there is a dot before.
+                // Also, the dot can only be placed after digital numbers.
+                if(Character.isDigit(typing.getText().charAt(typing.getText().length()-1)) && !hasDot){
                     typing.append(".");
                 }
             }
         });
-
+        //operations buttons:
         times = (Button) findViewById(R.id.multiply_button);
         divide = (Button) findViewById(R.id.divide_button);
         minus = (Button) findViewById(R.id.minus_button);
         plus = (Button) findViewById(R.id.plus_button);
+
+        //operations listeners:
         times.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isResult && (Character.isDigit(typing.getText().charAt(typing.getText().length()-1))||typing.getText().charAt(typing.getText().length()-1)==')')){
-                    typing.append("*");
-                }
-                else if(isResult){
-                    typing.setText(result.getText().toString() + "*");
-                    isResult = false;
-                }
+                operations("*");
             }
         });
         divide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isResult && (Character.isDigit(typing.getText().charAt(typing.getText().length()-1))||typing.getText().charAt(typing.getText().length()-1)==')')){
-                    typing.append("/");
-                }
-                else if(isResult){
-                    typing.setText(result.getText().toString() + "/");
-                    isResult = false;
-                }
+                operations("/");
             }
         });
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isResult && (Character.isDigit(typing.getText().charAt(typing.getText().length()-1))||typing.getText().charAt(typing.getText().length()-1)==')')){
-                    typing.append("-");
-                }
-                else if(isResult){
-                    typing.setText(result.getText().toString() + "-");
-                    isResult = false;
-                }
+                operations("-");
             }
         });
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!isResult && (Character.isDigit(typing.getText().charAt(typing.getText().length()-1))||typing.getText().charAt(typing.getText().length()-1)==')')){
-                    typing.append("+");
-                }
-                else if(isResult){
-                    typing.setText(result.getText().toString() + "+");
-                    isResult = false;
-                }
+                operations("+");
             }
         });
 
+        // brackets buttons:
         left_bracket = (Button) findViewById(R.id.left_bracket);
         right_bracket = (Button) findViewById(R.id.right_bracket);
-
+        // brackets listeners:
         left_bracket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                char x = typing.getText().charAt(typing.getText().length()-1);
-                if(x=='+'||x=='-'||x=='*'||x=='/'||x=='(') {
+                char prevChar = typing.getText().charAt(typing.getText().length()-1);
+                if(prevChar=='+'||prevChar=='-'||prevChar=='*'||prevChar=='/'||prevChar=='(') {
                     typing.append("(");
                 }
                 if(typing.getText().toString().equals("0")){
@@ -171,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        //equal button and its listener:
+        // It has used third party functions from mariuszgromada, the mxparser can transform the expression to an answer.
         equal = (Button) findViewById(R.id.equal_button);
         equal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,29 +190,34 @@ public class MainActivity extends AppCompatActivity {
                 String tp = typing.getText().toString();
                 Expression exp = new Expression(tp);
                 String re = String.valueOf(exp.calculate());
-                isResult = true;
+                hasResult = true;
                 result.setText(re);
             }
         });
 
+        // clear and delete buttons and their listeners:
         clear = (Button) findViewById(R.id.clear_button);
         delete = (Button) findViewById(R.id.delete_button);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 typing.setText("0");
-                isResult = false;
+                hasResult = false;
                 result.setText("0");
             }
         });
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!typing.getText().toString().equals("0") && typing.getText().length()>1) {
-                    typing.setText(typing.getText().subSequence(0, typing.getText().length() - 1));
+                int lengthOfTyping = typing.getText().length();
+                boolean isTypingZero = typing.getText().toString().equals("0");
+                boolean isResultZero = result.getText().toString().equals("0");
+
+                if(!isTypingZero && lengthOfTyping>1) {
+                    typing.setText(typing.getText().subSequence(0, lengthOfTyping - 1));
                 }
-                else if(typing.getText().toString().equals("0") && !result.getText().toString().equals("0")){
-                    isResult = false;
+                else if(isTypingZero && !isResultZero){
+                    hasResult = false;
                     result.setText("0");
                 }
                 else{
@@ -208,8 +225,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
 }
