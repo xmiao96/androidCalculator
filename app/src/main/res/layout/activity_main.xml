@@ -12,6 +12,8 @@
         android:isScrollContainer="true"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -56,8 +58,8 @@
             android:layout_weight="5" />
 
         <TableLayout
-            android:layout_width="411dp"
-            android:layout_height="253dp"
+            android:layout_width="wrap_content"
+            android:layout_height="262dp"
             android:layout_margin="4dp">
 
             <TableRow
@@ -66,25 +68,25 @@
 
                 <Button
                     android:id="@+id/left_bracket"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="(" />
 
                 <Button
                     android:id="@+id/right_bracket"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text=")" />
 
                 <Button
                     android:id="@+id/delete_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="del" />
 
                 <Button
                     android:id="@+id/clear_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="C" />
             </TableRow>
@@ -95,26 +97,26 @@
 
                 <Button
                     android:id="@+id/button_one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="1" />
 
                 <Button
                     android:id="@+id/button_two"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="2" />
 
                 <Button
                     android:id="@+id/button_three"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="3" />
 
                 <Button
                     android:id="@+id/multiply_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="*" />
 
             </TableRow>
@@ -125,26 +127,26 @@
 
                 <Button
                     android:id="@+id/button_four"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="4" />
 
                 <Button
                     android:id="@+id/button_five"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="5" />
 
                 <Button
                     android:id="@+id/button_six"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="6" />
 
                 <Button
                     android:id="@+id/divide_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="/" />
 
             </TableRow>
@@ -155,26 +157,26 @@
 
                 <Button
                     android:id="@+id/button_seven"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="7" />
 
                 <Button
                     android:id="@+id/button_eight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="8" />
 
                 <Button
                     android:id="@+id/button_nine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="9" />
 
                 <Button
                     android:id="@+id/plus_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="+" />
 
             </TableRow>
@@ -185,25 +187,25 @@
 
                 <Button
                     android:id="@+id/button_zero"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="0" />
 
                 <Button
                     android:id="@+id/dot_button"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="." />
 
                 <Button
                     android:id="@+id/equal_button"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="=" />
 
                 <Button
                     android:id="@+id/minus_button"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="-" />
 

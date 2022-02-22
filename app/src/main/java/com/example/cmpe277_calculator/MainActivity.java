@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //equal button and its listener:
-        // It has used third party functions from mariuszgromada, the mxparser can transform the expression to an answer.
+        // It has used third party functions from mariuszgromada, the mxparser object, Expression, can transform the expression to an answer.
         equal = (Button) findViewById(R.id.equal_button);
         equal.setOnClickListener(new View.OnClickListener() {
             @Override
